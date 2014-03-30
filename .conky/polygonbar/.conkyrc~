@@ -1,0 +1,48 @@
+##########################################
+# Conky Theme  :  Polygon Bar
+# Developed By :  lrmodes
+# email id     :  lrmodes@gmail.com
+# License      :  GPLV3
+# For instructions see the README file
+##########################################
+
+# CONKY SETTINGS
+background yes
+update_interval 1
+
+cpu_avg_samples 2
+net_avg_samples 2
+
+override_utf8_locale yes
+
+double_buffer yes
+no_buffers yes
+
+text_buffer_size 2048
+
+# WINDOW SETTINGS
+own_window yes
+own_window_type desktop
+own_window_transparent yes
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+
+border_inner_margin 0
+border_outer_margin 0
+
+minimum_size 225 705
+maximum_width 225
+
+alignment tr
+gap_x 10
+gap_y 40
+
+draw_shades yes
+draw_outline no
+draw_borders no
+draw_graph_borders no
+
+# LOADING LUA SCRIPTS
+
+# DATA FIELDS
+TEXT
+${image ~/bar.png}
