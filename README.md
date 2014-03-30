@@ -14,7 +14,9 @@ My Conky Bar to monitor vitals of my Computer. I like to share it. Change it and
 
 ### Instructions :
 
-1. 
+1. Pull the repository or Explicitly download the compressed form
+2. After extraction, copy ".startconky.sh" file present inside the extracted directory to the home directory (.startconky.sh --> home)
+3. After copying .startconky.sh, copy the directory to the home directory(.conky --> home)
 
 ### Project Related Resources :
 
