@@ -96,12 +96,12 @@ ${image ~/.conky/polygonbar/images/bar.png}
 \
 # Load Temperature Range, Temperature, Weather condition images, Pressure, Humidity, Windspeed icons #
 \
- ${image /home/maverick/.conky/polygonbar/icons/tem_ran.png -p 38,125 -s 24x24}\
- ${image /home/maverick/.conky/polygonbar/icons/tem.png -p 100,125 -s 24x24}\
- ${image /home/maverick/.conky/polygonbar/icons/con.png -p 160,125 -s 24x24}\
- ${image /home/maverick/.conky/polygonbar/icons/pre.png -p 38,172 -s 24x24}\
- ${image /home/maverick/.conky/polygonbar/icons/hum.png -p 100,172 -s 24x24}\
- ${image /home/maverick/.conky/polygonbar/icons/win_spe.png -p 160,176 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/tem_ran.png -p 38,125 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/tem.png -p 100,125 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/con.png -p 160,125 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/pre.png -p 38,172 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/hum.png -p 100,172 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/win_spe.png -p 160,176 -s 24x24}\
 \
  ${color ffffff}\
 # 	Get Data from Yahoo Weather API using WOEID		(Chennai=2295424)#
@@ -143,9 +143,9 @@ ${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forec
 \
 # Load Temperature Range, Temperature, Weather condition images, Pressure, Humidity, Windspeed Icons #
 \
- ${image /home/maverick/.conky/polygonbar/icons/cpu.png -p 25,250 -s 24x24}\
- ${image /home/maverick/.conky/polygonbar/icons/ram.png -p 25,290 -s 24x24}\
- ${image /home/maverick/.conky/polygonbar/icons/swa.png -p 25,330 -s 25x25}\
+ ${image ~/.conky/polygonbar/icons/cpu.png -p 25,250 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/ram.png -p 25,290 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/swa.png -p 25,330 -s 25x25}\
 # Track Parameters #
 \
  ${voffset 52}${goto 62}${cpu cpu0}%\
@@ -159,8 +159,8 @@ ${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forec
 #	Network Part	#
 # Load Network Icons #
 \
- ${image /home/maverick/.conky/polygonbar/icons/eth.png -p 25,390 -s 24x24}\
- ${image /home/maverick/.conky/polygonbar/icons/wifi.png -p 25,430 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/eth.png -p 25,390 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/wifi.png -p 25,430 -s 24x24}\
 # Track Parameters #
 \
  ${voffset 60}${goto 65}${totalup enp22s0}\
