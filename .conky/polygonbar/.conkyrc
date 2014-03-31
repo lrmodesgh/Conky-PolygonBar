@@ -41,7 +41,7 @@ draw_graph_borders no
 
 # LOADING LUA SCRIPTS #
 
-lua_load ~/.conky/polygonbar/polygonbar.lua
+lua_load ~/.conky/polygonbar/scripts/polygonbar.lua
 lua_draw_hook_pre clock_rings
 #----------------------------------------------------------------------#
 
@@ -76,7 +76,7 @@ text_buffer_size 2048
 # DATA FIELDS #
 TEXT
 # Background Image #
-${image ~/.conky/polygonbar/bar.png}
+${image ~/.conky/polygonbar/images/bar.png}
 \
 # Time, Date, Month Part #
 \
@@ -96,12 +96,12 @@ ${image ~/.conky/polygonbar/bar.png}
 \
 # Load Temperature Range, Temperature, Weather condition images, Pressure, Humidity, Windspeed icons #
 \
- ${image /home/maverick/.conky/polygonbar/tem_ran.png -p 38,125 -s 24x24}\
- ${image /home/maverick/.conky/polygonbar/tem.png -p 100,125 -s 24x24}\
- ${image /home/maverick/.conky/polygonbar/con.png -p 160,125 -s 24x24}\
- ${image /home/maverick/.conky/polygonbar/pre.png -p 38,172 -s 24x24}\
- ${image /home/maverick/.conky/polygonbar/hum.png -p 100,172 -s 24x24}\
- ${image /home/maverick/.conky/polygonbar/win_spe.png -p 160,176 -s 24x24}\
+ ${image /home/maverick/.conky/polygonbar/icons/tem_ran.png -p 38,125 -s 24x24}\
+ ${image /home/maverick/.conky/polygonbar/icons/tem.png -p 100,125 -s 24x24}\
+ ${image /home/maverick/.conky/polygonbar/icons/con.png -p 160,125 -s 24x24}\
+ ${image /home/maverick/.conky/polygonbar/icons/pre.png -p 38,172 -s 24x24}\
+ ${image /home/maverick/.conky/polygonbar/icons/hum.png -p 100,172 -s 24x24}\
+ ${image /home/maverick/.conky/polygonbar/icons/win_spe.png -p 160,176 -s 24x24}\
 \
  ${color ffffff}\
 # 	Get Data from Yahoo Weather API using WOEID		(Chennai=2295424)#
@@ -114,13 +114,13 @@ ${image ~/.conky/polygonbar/bar.png}
  ${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}\
 #	Extract climatic Conditions = " Temperature + Status " Data from XML	#
 \
- ${font cantarell:pixelsize=13}${voffset 00}${offset 23}\
- ${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°\
  ${font cantarell:pixelsize=13}${voffset 00}${offset 20}\
+ ${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°\
+ ${font cantarell:pixelsize=13}${voffset 00}${offset 25}\
  ${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "text=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
 #	Extract Pressure Data from XML	#
 \
- ${font cantarell:pixelsize=13}${voffset 50}${offset -175}\
+ ${font cantarell:pixelsize=13}${voffset 50}${offset -180}\
  ${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
  ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
 #	Extract Humidity Data from XML	#
@@ -132,4 +132,39 @@ ${image ~/.conky/polygonbar/bar.png}
  ${font cantarell:pixelsize=13}${voffset 00}${offset 12}\
  ${execi 300 grep "yweather:wind" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
  ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
+#-----------------------------------------------------------------------#
+\
+#	Update the Weather Conditions icons  after synchronizing weather forecast	#
+\
+${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-con.png}${image ~/.cache/weather-con.png -p 160,125 -s 24x24}\
+#-----------------------------------------------------------------------#
+\
+#	Computer Vital Hardware Status Part		#
+\
+# Load Temperature Range, Temperature, Weather condition images, Pressure, Humidity, Windspeed Icons #
+\
+ ${image /home/maverick/.conky/polygonbar/icons/cpu.png -p 25,250 -s 24x24}\
+ ${image /home/maverick/.conky/polygonbar/icons/ram.png -p 25,290 -s 24x24}\
+ ${image /home/maverick/.conky/polygonbar/icons/swa.png -p 25,330 -s 25x25}\
+# Track Parameters #
+\
+ ${voffset 52}${goto 62}${cpu cpu0}%\
+ ${voffset 00}${goto 100}${cpubar cpu0 5,100}\
+ ${voffset 40}${goto 62}${memperc}%\
+ ${voffset 00}${goto 100}${membar 5, 100}\
+ ${voffset 40}${goto 62}${swapperc}%\
+ ${voffset 00}${goto 100}${swapbar 5,100}\
+#-----------------------------------------------------------------------#
+\
+#	Network Part	#
+# Load Network Icons #
+\
+ ${image /home/maverick/.conky/polygonbar/icons/eth.png -p 25,390 -s 24x24}\
+ ${image /home/maverick/.conky/polygonbar/icons/wifi.png -p 25,430 -s 24x24}\
+# Track Parameters #
+\
+ ${voffset 60}${goto 65}${totalup enp22s0}\
+ ${voffset 00}${goto 140}${totaldown enp22s0}\
+ ${voffset 40}${goto 65}${totalup wlp18s0}\
+ ${voffset 00}${goto 140}${totaldown wlp18s0\}
 #-----------------------------------------------------------------------#
