@@ -60,23 +60,13 @@ text_buffer_size 2048
 
 #----------------------------------------------------------------------#
 
-# Variables that can be used: #
-
-# ${time %I:%M:%S}
-# ${fs_used_perc)%
-# ${memperc}%
-# ${cpu cpu0}%
-#----------------------------------------------------------------------#
-
 # Recycle Bin: #
-
-# ${voffset 60}${offset 100}${cpu cpu0}% ${fs_used_perc}% ${memperc}%
 #----------------------------------------------------------------------#
 
 # DATA FIELDS #
 TEXT
 # Background Image #
-${image ~/.conky/polygonbar/images/bar.png}
+ ${image ~/.conky/polygonbar/images/bar.png}
 \
 # Time, Date, Month Part #
 \
@@ -157,14 +147,46 @@ ${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forec
 #-----------------------------------------------------------------------#
 \
 #	Network Part	#
+\
 # Load Network Icons #
 \
  ${image ~/.conky/polygonbar/icons/eth.png -p 25,390 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/up.png -p 60,390 -s 12x12}\
+ ${image ~/.conky/polygonbar/icons/dow.png -p 140,390 -s 12x12}\
  ${image ~/.conky/polygonbar/icons/wifi.png -p 25,430 -s 24x24}\
-# Track Parameters #
+ ${image ~/.conky/polygonbar/icons/up.png -p 60,430 -s 12x12}\
+ ${image ~/.conky/polygonbar/icons/dow.png -p 140,430 -s 12x12}\
+# Track Hardware Vital Parameters #
 \
- ${voffset 60}${goto 65}${totalup enp22s0}\
- ${voffset 00}${goto 140}${totaldown enp22s0}\
- ${voffset 40}${goto 65}${totalup wlp18s0}\
- ${voffset 00}${goto 140}${totaldown wlp18s0\}
+ ${voffset 60}${goto 75}${totalup enp22s0}\
+ ${voffset 00}${goto 155}${totaldown enp22s0}\
+ ${voffset 40}${goto 75}${totalup wlp18s0}\
+ ${voffset 00}${goto 155}${totaldown wlp18s0\}
 #-----------------------------------------------------------------------#
+\
+#	Battery Part	#
+#\
+# Load Battery Icon #
+#\
+# ${image ~/.conky/polygonbar/icons/bat.png -p 25,490 -s 24x24}\
+# Track Battery Parameter #
+#\
+# ${voffset 60}${goto 50}${battery_short}\
+#-----------------------------------------------------------------------#
+\
+#	Quantity of Process and Threads Part	#
+\
+# Load Process and Thread Icon #
+\
+ ${image ~/.conky/polygonbar/icons/pro.png -p 25,485 -s 32x32}\
+ ${image ~/.conky/polygonbar/icons/thr.png -p 120,485 -s 35x35}\
+# Track  Total no. of Process and Threads  Running #
+\
+ ${voffset 42}${goto 65}${processes}\
+ ${voffset 00}${goto 160}${threads}\
+#-----------------------------------------------------------------------#
+\
+#	Face/Logo Part	#
+\
+# Load Face/Logo Image #
+${image ~/.conky/polygonbar/images/fac.png -p 60,545 -s 120x120}\
