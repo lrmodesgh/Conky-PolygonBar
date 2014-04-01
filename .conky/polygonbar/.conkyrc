@@ -136,7 +136,7 @@ ${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forec
  ${image ~/.conky/polygonbar/icons/cpu.png -p 25,250 -s 24x24}\
  ${image ~/.conky/polygonbar/icons/ram.png -p 25,290 -s 24x24}\
  ${image ~/.conky/polygonbar/icons/swa.png -p 25,330 -s 25x25}\
-# Track Parameters #
+# Track Vital Hardware Parameters #
 \
  ${voffset 52}${goto 62}${cpu cpu0}%\
  ${voffset 00}${goto 100}${cpubar cpu0 5,100}\
@@ -151,17 +151,19 @@ ${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forec
 # Load Network Icons #
 \
  ${image ~/.conky/polygonbar/icons/eth.png -p 25,390 -s 24x24}\
- ${image ~/.conky/polygonbar/icons/up.png -p 60,390 -s 12x12}\
- ${image ~/.conky/polygonbar/icons/dow.png -p 140,390 -s 12x12}\
- ${image ~/.conky/polygonbar/icons/wifi.png -p 25,430 -s 24x24}\
- ${image ~/.conky/polygonbar/icons/up.png -p 60,430 -s 12x12}\
- ${image ~/.conky/polygonbar/icons/dow.png -p 140,430 -s 12x12}\
-# Track Hardware Vital Parameters #
+ ${image ~/.conky/polygonbar/icons/up.png -p 70,390 -s 12x12}\
+ ${image ~/.conky/polygonbar/icons/dow.png -p 135,390 -s 12x12}\
+ ${image ~/.conky/polygonbar/icons/wif.png -p 25,425 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/up.png -p 70,430 -s 12x12}\
+ ${image ~/.conky/polygonbar/icons/dow.png -p 135,430 -s 12x12}\
+# Track Network Parameters #
 \
- ${voffset 60}${goto 75}${totalup enp22s0}\
- ${voffset 00}${goto 155}${totaldown enp22s0}\
- ${voffset 40}${goto 75}${totalup wlp18s0}\
- ${voffset 00}${goto 155}${totaldown wlp18s0\}
+ ${voffset 60}${goto 80}${totalup enp22s0}\
+ ${voffset 00}${goto 145}${totaldown enp22s0}\
+ ${voffset 40}${goto 80}${totalup wlp18s0}\
+ ${voffset 00}${goto 145}${totaldown wlp18s0}\
+ ${font cantarell:pixelsize=11}${voffset 09}${goto 50}${wireless_link_qual_perc wlp18s0}%\
+ ${font cantarell:pixelsize=13}\
 #-----------------------------------------------------------------------#
 \
 #	Battery Part	#
@@ -182,7 +184,7 @@ ${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forec
  ${image ~/.conky/polygonbar/icons/thr.png -p 120,485 -s 35x35}\
 # Track  Total no. of Process and Threads  Running #
 \
- ${voffset 42}${goto 65}${processes}\
+ ${voffset 48}${goto 65}${processes}\
  ${voffset 00}${goto 160}${threads}\
 #-----------------------------------------------------------------------#
 \
