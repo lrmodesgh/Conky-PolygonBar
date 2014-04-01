@@ -6,21 +6,18 @@
 # For instructions see the README file
 ##########################################
 
-# CONKY SETTINGS
+# CONKY SETTINGS #
 background yes
 update_interval 1
 
 cpu_avg_samples 2
 net_avg_samples 2
 
-override_utf8_locale yes
-
 double_buffer yes
 no_buffers yes
+#----------------------------------------------------------------------#
 
-text_buffer_size 2048
-
-# WINDOW SETTINGS
+# WINDOW SETTINGS #
 own_window yes
 own_window_type desktop
 own_window_transparent yes
@@ -36,13 +33,162 @@ alignment tr
 gap_x 10
 gap_y 40
 
-draw_shades yes
+draw_shades no
 draw_outline no
 draw_borders no
 draw_graph_borders no
+#----------------------------------------------------------------------#
 
-# LOADING LUA SCRIPTS
+# LOADING LUA SCRIPTS #
 
-# DATA FIELDS
+lua_load ~/.conky/polygonbar/scripts/polygonbar.lua
+lua_draw_hook_pre clock_rings
+#----------------------------------------------------------------------#
+
+# TEXT SETTINGS #
+
+override_utf8_locale yes
+use_xft yes
+xftfont cantarell:size=20
+xftalpha 1.0
+
+uppercase no
+ 
+default_color FFFFFF
+
+text_buffer_size 2048
+
+#----------------------------------------------------------------------#
+
+# Recycle Bin: #
+#----------------------------------------------------------------------#
+
+# DATA FIELDS #
 TEXT
-${image ~/bar.png}
+# Background Image #
+ ${image ~/.conky/polygonbar/images/bar.png}
+\
+# Time, Date, Month Part #
+\
+ ${color ffffff}\
+ ${font cantarell:pixelsize=15 style:bold}${voffset -30}${goto 187}\
+ ${time %p}\
+ ${font cantarell:pixelsize=20 style:bold}${voffset 05}${goto 15}\
+ ${time %A}\
+ ${font cantarell:pixelsize=30}${voffset 25}${goto 15}\
+ ${time %d}\
+ ${font cantarell:pixelsize=13 style:bold}${color ffffff}\
+ ${time %B}\
+ ${font cantarell:pixelsize=30}${voffset 15}${goto 15}\
+ ${time %G}\
+\
+# Weather Part #
+\
+# Load Temperature Range, Temperature, Weather condition images, Pressure, Humidity, Windspeed icons #
+\
+ ${image ~/.conky/polygonbar/icons/tem_ran.png -p 38,125 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/tem.png -p 100,125 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/con.png -p 160,125 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/pre.png -p 38,172 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/hum.png -p 100,172 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/win_spe.png -p 160,176 -s 24x24}\
+\
+ ${color ffffff}\
+# 	Get Data from Yahoo Weather API using WOEID		(Chennai=2295424)#
+\
+ ${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=2295424&u=c" -o ~/.cache/weather.xml} \
+#	Extract Temperature Range = " Min + Max " from XML	#
+\
+ ${font cantarell:pixelsize=13}${voffset 50}${goto 25}\
+ ${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°/\
+ ${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}\
+#	Extract climatic Conditions = " Temperature + Status " Data from XML	#
+\
+ ${font cantarell:pixelsize=13}${voffset 00}${goto 100}\
+ ${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°\
+ ${font cantarell:pixelsize=13}${voffset 00}${goto 155}\
+ ${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "text=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
+#	Extract Pressure Data from XML	#
+\
+ ${font cantarell:pixelsize=13}${voffset 50}${goto 20}\
+ ${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
+ ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
+#	Extract Humidity Data from XML	#
+\
+ ${font cantarell:pixelsize=13}${voffset 00}${goto 100}\
+ ${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "humidity=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
+#	Extract Wind Speed Data from XML	#
+\
+ ${font cantarell:pixelsize=13}${voffset 00}${goto 135}\
+ ${execi 300 grep "yweather:wind" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
+ ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
+#-----------------------------------------------------------------------#
+\
+#	Update the Weather Conditions icons  after synchronizing weather forecast	#
+\
+${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-con.png}${image ~/.cache/weather-con.png -p 160,125 -s 24x24}\
+#-----------------------------------------------------------------------#
+\
+#	Computer Vital Hardware Status Part		#
+\
+# Load Temperature Range, Temperature, Weather condition images, Pressure, Humidity, Windspeed Icons #
+\
+ ${image ~/.conky/polygonbar/icons/cpu.png -p 25,250 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/ram.png -p 25,290 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/fs.png -p 25,325 -s 22x22}\
+# Track Vital Hardware Parameters #
+\
+ ${voffset 52}${goto 62}${cpu cpu0}%\
+ ${voffset 00}${goto 100}${cpubar cpu0 5,100}\
+ ${voffset 40}${goto 62}${memperc}%\
+ ${voffset 00}${goto 100}${membar 5, 100}\
+ ${voffset 40}${goto 62}${fs_used_perc}%\
+ ${voffset 00}${goto 100}${fs_bar 5,100}\
+#-----------------------------------------------------------------------#
+\
+#	Network Part	#
+\
+# Load Network Icons #
+\
+ ${image ~/.conky/polygonbar/icons/eth.png -p 25,390 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/up.png -p 70,390 -s 12x12}\
+ ${image ~/.conky/polygonbar/icons/dow.png -p 135,390 -s 12x12}\
+ ${image ~/.conky/polygonbar/icons/wif.png -p 25,425 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/up.png -p 70,430 -s 12x12}\
+ ${image ~/.conky/polygonbar/icons/dow.png -p 135,430 -s 12x12}\
+# Track Network Parameters #
+\
+ ${voffset 60}${goto 80}${totalup enp22s0}\
+ ${voffset 00}${goto 145}${totaldown enp22s0}\
+ ${voffset 40}${goto 80}${totalup wlp18s0}\
+ ${voffset 00}${goto 145}${totaldown wlp18s0}\
+ ${font cantarell:pixelsize=11}${voffset 09}${goto 50}${wireless_link_qual_perc wlp18s0}%\
+ ${font cantarell:pixelsize=13}\
+#-----------------------------------------------------------------------#
+\
+#	Battery Part	#
+#\
+# Load Battery Icon #
+#\
+# ${image ~/.conky/polygonbar/icons/bat.png -p 25,490 -s 24x24}\
+# Track Battery Parameter #
+#\
+# ${voffset 60}${goto 50}${battery_short}\
+#-----------------------------------------------------------------------#
+\
+#	Quantity of Process and Threads Part	#
+\
+# Load Process and Thread Icon #
+\
+ ${image ~/.conky/polygonbar/icons/pro.png -p 25,485 -s 32x32}\
+ ${image ~/.conky/polygonbar/icons/thr.png -p 120,485 -s 35x35}\
+# Track  Total no. of Process and Threads  Running #
+\
+ ${voffset 48}${goto 65}${processes}\
+ ${voffset 00}${goto 160}${threads}\
+#-----------------------------------------------------------------------#
+\
+#	Face/Logo Part	#
+\
+# Load Face/Logo Image #
+${image ~/.conky/polygonbar/images/fac.png -p 54,544 -s 130x128}\

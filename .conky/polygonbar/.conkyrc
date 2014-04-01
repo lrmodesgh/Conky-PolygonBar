@@ -135,15 +135,15 @@ ${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forec
 \
  ${image ~/.conky/polygonbar/icons/cpu.png -p 25,250 -s 24x24}\
  ${image ~/.conky/polygonbar/icons/ram.png -p 25,290 -s 24x24}\
- ${image ~/.conky/polygonbar/icons/swa.png -p 25,330 -s 25x25}\
+ ${image ~/.conky/polygonbar/icons/fs.png -p 25,325 -s 22x22}\
 # Track Vital Hardware Parameters #
 \
  ${voffset 52}${goto 62}${cpu cpu0}%\
  ${voffset 00}${goto 100}${cpubar cpu0 5,100}\
  ${voffset 40}${goto 62}${memperc}%\
  ${voffset 00}${goto 100}${membar 5, 100}\
- ${voffset 40}${goto 62}${swapperc}%\
- ${voffset 00}${goto 100}${swapbar 5,100}\
+ ${voffset 40}${goto 62}${fs_used_perc}%\
+ ${voffset 00}${goto 100}${fs_bar 5,100}\
 #-----------------------------------------------------------------------#
 \
 #	Network Part	#
@@ -191,4 +191,4 @@ ${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forec
 #	Face/Logo Part	#
 \
 # Load Face/Logo Image #
-${image ~/.conky/polygonbar/images/fac.png -p 60,545 -s 120x120}\
+${image ~/.conky/polygonbar/images/logo_or_face.png -p 54,544 -s 130x128}\
