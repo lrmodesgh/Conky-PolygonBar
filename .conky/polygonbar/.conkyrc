@@ -71,15 +71,15 @@ TEXT
 # Time, Date, Month Part #
 \
  ${color ffffff}\
- ${font cantarell:pixelsize=15 style:bold}${voffset -30}${offset 170}\
+ ${font cantarell:pixelsize=15 style:bold}${voffset -30}${goto 187}\
  ${time %p}\
- ${font cantarell:pixelsize=20 style:bold}${voffset 05}${offset -200}\
+ ${font cantarell:pixelsize=20 style:bold}${voffset 05}${goto 15}\
  ${time %A}\
- ${font cantarell:pixelsize=30}${voffset 25}${offset -83}\
+ ${font cantarell:pixelsize=30}${voffset 25}${goto 15}\
  ${time %d}\
  ${font cantarell:pixelsize=13 style:bold}${color ffffff}\
  ${time %B}\
- ${font cantarell:pixelsize=30}${voffset 15}${offset -98}\
+ ${font cantarell:pixelsize=30}${voffset 15}${goto 15}\
  ${time %G}\
 \
 # Weather Part #
@@ -99,27 +99,27 @@ TEXT
  ${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=2295424&u=c" -o ~/.cache/weather.xml} \
 #	Extract Temperature Range = " Min + Max " from XML	#
 \
- ${font cantarell:pixelsize=13}${voffset 50}${offset -150}\
+ ${font cantarell:pixelsize=13}${voffset 50}${goto 25}\
  ${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°/\
  ${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}\
 #	Extract climatic Conditions = " Temperature + Status " Data from XML	#
 \
- ${font cantarell:pixelsize=13}${voffset 00}${offset 20}\
+ ${font cantarell:pixelsize=13}${voffset 00}${goto 100}\
  ${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°\
- ${font cantarell:pixelsize=13}${voffset 00}${offset 25}\
+ ${font cantarell:pixelsize=13}${voffset 00}${goto 155}\
  ${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "text=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
 #	Extract Pressure Data from XML	#
 \
- ${font cantarell:pixelsize=13}${voffset 50}${offset -180}\
+ ${font cantarell:pixelsize=13}${voffset 50}${goto 20}\
  ${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
  ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
 #	Extract Humidity Data from XML	#
 \
- ${font cantarell:pixelsize=13}${voffset 00}${offset 10}\
+ ${font cantarell:pixelsize=13}${voffset 00}${goto 100}\
  ${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "humidity=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
 #	Extract Wind Speed Data from XML	#
 \
- ${font cantarell:pixelsize=13}${voffset 00}${offset 12}\
+ ${font cantarell:pixelsize=13}${voffset 00}${goto 135}\
  ${execi 300 grep "yweather:wind" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
  ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
 #-----------------------------------------------------------------------#
