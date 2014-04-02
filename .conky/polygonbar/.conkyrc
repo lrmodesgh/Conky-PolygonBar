@@ -151,18 +151,29 @@ ${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forec
 # Load Network Icons #
 \
  ${image ~/.conky/polygonbar/icons/eth.png -p 25,390 -s 24x24}\
- ${image ~/.conky/polygonbar/icons/up.png -p 70,390 -s 12x12}\
- ${image ~/.conky/polygonbar/icons/dow.png -p 135,390 -s 12x12}\
  ${image ~/.conky/polygonbar/icons/wif.png -p 25,425 -s 24x24}\
- ${image ~/.conky/polygonbar/icons/up.png -p 70,430 -s 12x12}\
- ${image ~/.conky/polygonbar/icons/dow.png -p 135,430 -s 12x12}\
 # Track Network Parameters #
 \
+# Ehternet Device port = enp22s0 ;  Wireless Device Port = wlp18s0 #
+# The corresponding port id's can be found using ifconfig -a #
+\
+ ${if_existing /proc/net/route enp22s0}\
+ ${image ~/.conky/polygonbar/icons/up.png -p 70,390 -s 12x12}\
  ${voffset 60}${goto 80}${totalup enp22s0}\
+ ${image ~/.conky/polygonbar/icons/dow.png -p 135,390 -s 12x12}\
  ${voffset 00}${goto 145}${totaldown enp22s0}\
+ ${else}\
+ ${voffset 60}${goto 80}Disconnected\
+ ${endif}\
+ ${if_existing /proc/net/route wlp18s0}\
+ ${image ~/.conky/polygonbar/icons/up.png -p 70,430 -s 12x12}\
  ${voffset 40}${goto 80}${totalup wlp18s0}\
+ ${image ~/.conky/polygonbar/icons/dow.png -p 135,430 -s 12x12}\
  ${voffset 00}${goto 145}${totaldown wlp18s0}\
  ${font cantarell:pixelsize=11}${voffset 09}${goto 50}${wireless_link_qual_perc wlp18s0}%\
+ ${else}\
+ ${voffset 35}${goto 80}Disconnected\
+ ${endif}\
  ${font cantarell:pixelsize=13}\
 #-----------------------------------------------------------------------#
 \
@@ -191,4 +202,4 @@ ${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forec
 #	Face/Logo Part	#
 \
 # Load Face/Logo Image #
-${image ~/.conky/polygonbar/images/logo_or_face.png -p 54,544 -s 130x128}\
+${image ~/.conky/polygonbar/images/fac.png -p 54,544 -s 130x128}\
