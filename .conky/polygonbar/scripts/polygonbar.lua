@@ -1,6 +1,6 @@
 clock_r=35
 clock_x=165
-clock_y=80
+clock_y=75
 clock_colour=0x000000
 clock_alpha=1.0
 
@@ -15,7 +15,7 @@ settings_table = {
 		bg_alpha=0.5,
 		fg_colour=0xccff00,
 		fg_alpha=1.0,
-		x=165, y=80,
+		x=165, y=75,
 		radius=40,
 		thickness=3,
 		start_angle=0,
@@ -29,7 +29,7 @@ settings_table = {
 		bg_alpha=0.5,
 		fg_colour=0x00d400,
 		fg_alpha=1.0,
-		x=165, y=80,
+		x=165, y=75,
 		radius=31,
 		thickness=3,
 		start_angle=0,
@@ -43,7 +43,7 @@ settings_table = {
 		bg_alpha=0.5,
 		fg_colour=0x0000aa,
 		fg_alpha=0.8,
-		x=165, y=80,
+		x=165, y=75,
 		radius=22,
 		thickness=3,
 		start_angle=0,

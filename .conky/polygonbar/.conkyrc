@@ -87,11 +87,11 @@ TEXT
 # Load Temperature Range, Temperature, Weather condition images, Pressure, Humidity, Windspeed icons #
 \
  ${image ~/.conky/polygonbar/icons/tem_ran.png -p 38,125 -s 24x24}\
- ${image ~/.conky/polygonbar/icons/tem.png -p 100,125 -s 24x24}\
- ${image ~/.conky/polygonbar/icons/con.png -p 160,125 -s 24x24}\
- ${image ~/.conky/polygonbar/icons/pre.png -p 38,172 -s 24x24}\
- ${image ~/.conky/polygonbar/icons/hum.png -p 100,172 -s 24x24}\
- ${image ~/.conky/polygonbar/icons/win_spe.png -p 160,176 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/con.png -p 110,125 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/tem.png -p 180,125 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/pre.png -p 35,175 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/win_spe.png -p 110,180 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/hum.png -p 180,176 -s 24x24}\
 \
  ${color ffffff}\
 # 	Get Data from Yahoo Weather API using WOEID		(Chennai=2295424)#
@@ -104,29 +104,29 @@ TEXT
  ${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}\
 #	Extract climatic Conditions = " Temperature + Status " Data from XML	#
 \
- ${font cantarell:pixelsize=13}${voffset 00}${goto 100}\
+ ${font cantarell:pixelsize=13}${voffset 00}${goto 180}\
  ${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°\
- ${font cantarell:pixelsize=13}${voffset 00}${goto 155}\
+ ${font cantarell:pixelsize=13}${voffset 00}${goto 80}\
  ${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "text=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
 #	Extract Pressure Data from XML	#
 \
- ${font cantarell:pixelsize=13}${voffset 50}${goto 20}\
+ ${font cantarell:pixelsize=13}${voffset 50}${goto 15}\
  ${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
  ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
-#	Extract Humidity Data from XML	#
-\
- ${font cantarell:pixelsize=13}${voffset 00}${goto 100}\
- ${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "humidity=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
 #	Extract Wind Speed Data from XML	#
 \
- ${font cantarell:pixelsize=13}${voffset 00}${goto 135}\
+ ${font cantarell:pixelsize=13}${voffset 00}${goto 90}\
  ${execi 300 grep "yweather:wind" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
  ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
+#	Extract Humidity Data from XML	#
+\
+ ${font cantarell:pixelsize=13}${voffset 00}${goto 180}\
+ ${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "humidity=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}\
 #-----------------------------------------------------------------------#
 \
 #	Update the Weather Conditions icons  after synchronizing weather forecast	#
 \
-${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-con.png}${image ~/.cache/weather-con.png -p 160,125 -s 24x24}\
+${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-con.png}${image ~/.cache/weather-con.png -p 110,125 -s 24x24}\
 #-----------------------------------------------------------------------#
 \
 #	Computer Vital Hardware Status Part		#
@@ -195,7 +195,7 @@ ${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forec
  ${image ~/.conky/polygonbar/icons/thr.png -p 120,485 -s 35x35}\
 # Track  Total no. of Process and Threads  Running #
 \
- ${voffset 48}${goto 65}${processes}\
+ ${voffset 65}${goto 65}${processes}\
  ${voffset 00}${goto 160}${threads}\
 #-----------------------------------------------------------------------#
 \
