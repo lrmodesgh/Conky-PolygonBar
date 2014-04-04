@@ -87,7 +87,7 @@ TEXT
 # Load Temperature Range, Temperature, Weather condition images, Pressure, Humidity, Windspeed icons #
 \
  ${image ~/.conky/polygonbar/icons/tem_ran.png -p 38,125 -s 24x24}\
- ${image ~/.conky/polygonbar/icons/con.png -p 110,125 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/con.png -p 90,125 -s 24x24}\
  ${image ~/.conky/polygonbar/icons/tem.png -p 180,125 -s 24x24}\
  ${image ~/.conky/polygonbar/icons/pre.png -p 35,175 -s 24x24}\
  ${image ~/.conky/polygonbar/icons/win_spe.png -p 110,180 -s 24x24}\
@@ -126,7 +126,7 @@ TEXT
 \
 #	Update the Weather Conditions icons  after synchronizing weather forecast	#
 \
-${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-con.png}${image ~/.cache/weather-con.png -p 110,125 -s 24x24}\
+${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-con.png}${image ~/.cache/weather-con.png -p 90,125 -s 24x24}\
 #-----------------------------------------------------------------------#
 \
 #	Computer Vital Hardware Status Part		#
@@ -200,6 +200,8 @@ ${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forec
  ${else}\
  ${if_existing /proc/net/route wlp18s0}\
  ${voffset 35}\
+ ${else}\
+ ${voffset 50}\
  ${endif}\
  ${endif}\
  
