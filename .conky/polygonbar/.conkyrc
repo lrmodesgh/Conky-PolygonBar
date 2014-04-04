@@ -163,7 +163,7 @@ ${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forec
  ${image ~/.conky/polygonbar/icons/dow.png -p 135,390 -s 12x12}\
  ${voffset 00}${goto 145}${totaldown enp22s0}\
  ${else}\
- ${voffset 60}${goto 80}Disconnected\
+ ${voffset 60}${goto 70}Ethernet Disconnected\
  ${endif}\
  ${if_existing /proc/net/route wlp18s0}\
  ${image ~/.conky/polygonbar/icons/up.png -p 70,430 -s 12x12}\
@@ -172,7 +172,7 @@ ${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forec
  ${voffset 00}${goto 145}${totaldown wlp18s0}\
  ${font cantarell:pixelsize=11}${voffset 09}${goto 50}${wireless_link_qual_perc wlp18s0}%\
  ${else}\
- ${voffset 35}${goto 80}Disconnected\
+ ${voffset 35}${goto 70}Wireless Disconnected\
  ${endif}\
  ${font cantarell:pixelsize=13}\
 #-----------------------------------------------------------------------#
@@ -195,11 +195,19 @@ ${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forec
  ${image ~/.conky/polygonbar/icons/thr.png -p 120,485 -s 35x35}\
 # Track  Total no. of Process and Threads  Running #
 \
- ${voffset 65}${goto 65}${processes}\
+ ${if_existing /proc/net/route enp22s0}\
+ ${voffset 50}\
+ ${else}\
+ ${if_existing /proc/net/route wlp18s0}\
+ ${voffset 35}\
+ ${endif}\
+ ${endif}\
+ 
+ ${voffset 00}${goto 65}${processes}\
  ${voffset 00}${goto 160}${threads}\
 #-----------------------------------------------------------------------#
 \
 #	Face/Logo Part	#
 \
 # Load Face/Logo Image #
-${image ~/.conky/polygonbar/images/fac.png -p 54,544 -s 130x128}\
+${image ~/.conky/polygonbar/images/fac.png -p 53,544 -s 132x128}\
