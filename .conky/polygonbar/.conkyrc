@@ -101,7 +101,7 @@ TEXT
 \
  ${font cantarell:pixelsize=13}${voffset 50}${goto 25}\
  ${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°/\
- ${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}\
+ ${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°\
 #	Extract climatic Conditions = " Temperature + Status " Data from XML	#
 \
  ${font cantarell:pixelsize=13}${voffset 00}${goto 180}\
