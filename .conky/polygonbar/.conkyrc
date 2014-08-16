@@ -126,7 +126,7 @@ TEXT
 \
 #	Update the Weather Conditions icons  after synchronizing weather forecast	#
 \
-${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-con.png}${image ~/.cache/weather-con.png -p 90,125 -s 24x24}\
+ ${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-con.png}${image ~/.cache/weather-con.png -p 90,125 -s 24x24}\
 #-----------------------------------------------------------------------#
 \
 #	Computer Vital Hardware Status Part		#
@@ -147,32 +147,34 @@ ${execi 300 cp -f ~/.conky/polygonbar/icons/weather-icons/$(grep "yweather:forec
 #-----------------------------------------------------------------------#
 \
 #	Network Part	#
+# Load Network Icons & Track Network Parameters #
 \
-# Load Network Icons #
+${image ~/.conky/polygonbar/icons/int.png -p 110,390 -s 24x24}\
 \
- ${image ~/.conky/polygonbar/icons/eth.png -p 25,390 -s 24x24}\
- ${image ~/.conky/polygonbar/icons/wif.png -p 25,425 -s 24x24}\
-# Track Network Parameters #
-\
-# Ehternet Device port = enp22s0 ;  Wireless Device Port = wlp18s0 #
+# Ehternet Device port = enp22s0 ;  Wireless Device Port = wlp18s0 ; USB Tethered Port = enp0s29u1u1 #
 # The corresponding port id's can be found using ifconfig -a #
 \
  ${if_existing /proc/net/route enp22s0}\
- ${image ~/.conky/polygonbar/icons/up.png -p 70,390 -s 12x12}\
+ ${image ~/.conky/polygonbar/icons/eth.png -p 25,390 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/up.png -p 85,420 -s 12x12}\
  ${voffset 60}${goto 80}${totalup enp22s0}\
- ${image ~/.conky/polygonbar/icons/dow.png -p 135,390 -s 12x12}\
+ ${image ~/.conky/polygonbar/icons/dow.png -p 128,420 -s 12x12}\
  ${voffset 00}${goto 145}${totaldown enp22s0}\
- ${else}\
- ${voffset 60}${goto 70}Ethernet Disconnected\
+ ${endif}\
+ ${if_existing /proc/net/route enp0s29u1u1}\
+ ${image ~/.conky/polygonbar/icons/usb.png -p 25,390 -s 24x55}\
+ ${image ~/.conky/polygonbar/icons/up.png -p 95,410 -s 12x12}\
+ ${voffset 90}${goto 70}${totalup enp0s29u1u1}\
+ ${image ~/.conky/polygonbar/icons/dow.png -p 138,410 -s 12x12}\
+ ${voffset 00}${goto 140}${totaldown enp0s29u1u1}\
  ${endif}\
  ${if_existing /proc/net/route wlp18s0}\
- ${image ~/.conky/polygonbar/icons/up.png -p 70,430 -s 12x12}\
+ ${image ~/.conky/polygonbar/icons/wif.png -p 25,390 -s 24x24}\
+ ${image ~/.conky/polygonbar/icons/up.png -p 85,420 -s 12x12}\
  ${voffset 40}${goto 80}${totalup wlp18s0}\
- ${image ~/.conky/polygonbar/icons/dow.png -p 135,430 -s 12x12}\
+ ${image ~/.conky/polygonbar/icons/dow.png -p 128,420 -s 12x12}\
  ${voffset 00}${goto 145}${totaldown wlp18s0}\
  ${font cantarell:pixelsize=11}${voffset 09}${goto 50}${wireless_link_qual_perc wlp18s0}%\
- ${else}\
- ${voffset 35}${goto 70}Wireless Disconnected\
  ${endif}\
  ${font cantarell:pixelsize=13}\
 #-----------------------------------------------------------------------#
