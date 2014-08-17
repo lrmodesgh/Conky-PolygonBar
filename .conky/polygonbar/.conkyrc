@@ -149,32 +149,34 @@ TEXT
 #	Network Part	#
 # Load Network Icons & Track Network Parameters #
 \
-${image ~/.conky/polygonbar/icons/int.png -p 110,390 -s 24x24}\
+${image ~/.conky/polygonbar/icons/int.png -p 120,390 -s 24x24}\
+${image ~/.conky/polygonbar/icons/up.png -p 105,410 -s 12x12}\
+${image ~/.conky/polygonbar/icons/dow.png -p 148,410 -s 12x12}\
 \
 # Ehternet Device port = enp22s0 ;  Wireless Device Port = wlp18s0 ; USB Tethered Port = enp0s29u1u1 #
 # The corresponding port id's can be found using ifconfig -a #
 \
  ${if_existing /proc/net/route enp22s0}\
  ${image ~/.conky/polygonbar/icons/eth.png -p 25,390 -s 24x24}\
- ${image ~/.conky/polygonbar/icons/up.png -p 85,420 -s 12x12}\
- ${voffset 60}${goto 80}${totalup enp22s0}\
- ${image ~/.conky/polygonbar/icons/dow.png -p 128,420 -s 12x12}\
- ${voffset 00}${goto 145}${totaldown enp22s0}\
- ${endif}\
+ ${voffset 90}${goto 60}${totalup enp22s0}\
+ ${voffset 00}${goto 160}${totaldown enp22s0}\
+ ${else}\
  ${if_existing /proc/net/route enp0s29u1u1}\
  ${image ~/.conky/polygonbar/icons/usb.png -p 25,390 -s 24x55}\
- ${image ~/.conky/polygonbar/icons/up.png -p 95,410 -s 12x12}\
- ${voffset 90}${goto 70}${totalup enp0s29u1u1}\
- ${image ~/.conky/polygonbar/icons/dow.png -p 138,410 -s 12x12}\
- ${voffset 00}${goto 140}${totaldown enp0s29u1u1}\
- ${endif}\
+ ${voffset 90}${goto 60}${totalup enp0s29u1u1}\
+ ${voffset 00}${goto 160}${totaldown enp0s29u1u1}\
+ ${else}\
  ${if_existing /proc/net/route wlp18s0}\
  ${image ~/.conky/polygonbar/icons/wif.png -p 25,390 -s 24x24}\
- ${image ~/.conky/polygonbar/icons/up.png -p 85,420 -s 12x12}\
- ${voffset 40}${goto 80}${totalup wlp18s0}\
- ${image ~/.conky/polygonbar/icons/dow.png -p 128,420 -s 12x12}\
- ${voffset 00}${goto 145}${totaldown wlp18s0}\
- ${font cantarell:pixelsize=11}${voffset 09}${goto 50}${wireless_link_qual_perc wlp18s0}%\
+ ${voffset 90}${goto 60}${totalup wlp18s0}\
+ ${voffset 00}${goto 160}${totaldown wlp18s0}\
+ ${font cantarell:pixelsize=10}${voffset -15}${goto 25}${wireless_link_qual_perc wlp18s0}%\
+ ${else}\
+ ${image ~/.conky/polygonbar/icons/noc.png -p 25,390 -s 24x24}\
+ ${voffset 90}${goto 90}0B\
+ ${voffset 00}${goto 160}0B\
+ ${endif}\
+ ${endif}\
  ${endif}\
  ${font cantarell:pixelsize=13}\
 #-----------------------------------------------------------------------#
@@ -190,28 +192,31 @@ ${image ~/.conky/polygonbar/icons/int.png -p 110,390 -s 24x24}\
 #-----------------------------------------------------------------------#
 \
 #	Quantity of Process and Threads Part	#
-\
-# Load Process and Thread Icon #
-\
- ${image ~/.conky/polygonbar/icons/pro.png -p 25,485 -s 32x32}\
- ${image ~/.conky/polygonbar/icons/thr.png -p 120,485 -s 35x35}\
+# Load Process and Thread Icons #
+${image ~/.conky/polygonbar/icons/pro.png -p 25,485 -s 32x32}\
+${image ~/.conky/polygonbar/icons/thr.png -p 120,485 -s 35x35}\
+${voffset 50}
 # Track  Total no. of Process and Threads  Running #
-\
  ${if_existing /proc/net/route enp22s0}\
- ${voffset 50}\
+ ${voffset 02}${goto 65}${processes}\
+ ${voffset 00}${goto 160}${threads}\
  ${else}\
- ${if_existing /proc/net/route wlp18s0}\
- ${voffset 35}\
- ${else}\
- ${voffset 50}\
- ${endif}\
- ${endif}\
- 
+ ${if_existing /proc/net/route enp0s29u1u1}\
  ${voffset 00}${goto 65}${processes}\
  ${voffset 00}${goto 160}${threads}\
+ ${else}\
+ ${if_existing /proc/net/route wlp18s0}\
+ ${voffset 15}${goto 65}${processes}\
+ ${voffset 00}${goto 160}${threads}\
+ ${else}\
+ ${voffset 02}${goto 65}${processes}\
+ ${voffset 00}${goto 160}${threads}\
+ ${endif}
+ ${endif}
+ ${endif} 
 #-----------------------------------------------------------------------#
-\
 #	Face/Logo Part	#
 \
 # Load Face/Logo Image #
 ${image ~/.conky/polygonbar/images/fac.png -p 53,544 -s 132x128}\
+\
